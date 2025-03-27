@@ -1,0 +1,180 @@
+/* Sidebar */
+.sidebar {
+  width: 256px;
+  background-color: var(--background);
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Database Switcher */
+.databaseSwitcher {
+  margin-top: 8px;
+}
+
+.switcherButton {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  background-color: transparent;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.databaseSwitcher span {
+  margin-left: 32px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.databaseSwitcher .icon {
+  margin-left: auto;
+  color: var(--muted-foreground);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  list-style-type: none;
+  padding: 8px 0;
+  margin-top: 4px;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #e2e8f0;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+/* Sidebar Tables & Collections */
+
+.sidebarButton {
+  width: 100%;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: var(--muted-foreground);
+}
+
+.title {
+  margin-left: 16px;
+}
+
+.sidebarList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebarItem {
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: 20px;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+.tableTitle {
+  font-size: 16px;
+  color: var(--primary);
+}
+
+.collapseIcon {
+  margin-left: auto;
+  transition: transform 0.2s;
+}
+
+.collapseIcon.expanded {
+  transform: rotate(90deg);
+}
+
+.schemaContainerTables {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
+  border-left: 1px solid var(--border);
+}
+
+.schemaItemTables {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-left: 16px;
+}
+
+.schemaKeyTables {
+  color: var(--primary);
+}
+
+.schemaValueTables {
+  color: var(--muted-foreground);
+}
+
+.schemaContainerCollections {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
+  border-left: 1px solid var(--border);
+}
+
+.schemaItemCollections {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin-left: 16px;
+}
+
+.schemaKeyCollections {
+  color: hsl(263.4 70% 50.4%);
+  margin-right: 12px;
+  font-weight: 700;
+}
+
+.schemaValueCollections {
+  color: var(--muted-foreground);
+}

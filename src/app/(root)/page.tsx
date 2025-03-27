@@ -1,6 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from "./_css/page.module.css";
+import styles from "@/app/(root)/_styles/page.module.css";
+
+import MainLayout from "./_components/main-layout";
 
 export default function Home() {
-  return <div>Atlan Frontend Assignment</div>;
+  return (
+    <MainLayout>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Welcome to Atlan SQL Editor</h1>
+      </div>
+    </MainLayout>
+  );
 }

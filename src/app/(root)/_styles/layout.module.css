@@ -1,0 +1,16 @@
+.layoutContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.contentContainer {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.mainContent {
+  flex: 1;
+  overflow: auto;
+}
