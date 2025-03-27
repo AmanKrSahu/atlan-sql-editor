@@ -54,7 +54,7 @@ const eslintConfig = [
     },
   },
   {
-    files: ["**/*.js"],
+    files: ["**/*.js", "**/*.jsx"],
     rules: {
       "unicorn/prefer-module": "off",
     },
