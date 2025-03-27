@@ -1,0 +1,214 @@
+/* Editor Container */
+.editorContainer {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+}
+
+/* Tab Bar */
+.tabBar {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-foreground);
+}
+
+.tabList {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.tabList::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.tabItem {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  background-color: var(--primary-foreground);
+}
+
+.tabItemActive {
+  background-color: var(--background);
+  color: var(--primary);
+  border-bottom: 3px solid hsl(263.4 70% 50.4%);
+}
+
+.tabItemInactive {
+  color: var(--muted-foreground);
+}
+
+.icon {
+  height: 16px;
+  width: 16px;
+  margin-right: 8px;
+  color: var(--muted-foreground);
+}
+
+.tabTitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  font-size: 16px;
+}
+
+.closeIcon {
+  width: 16px;
+  height: 16px;
+  margin-left: 12px;
+}
+
+.closeIcon:hover {
+  color: hsl(263.4 70% 50.4%);
+}
+
+.addTabButton {
+  color: hsl(263.4 70% 50.4%);
+  border: none;
+  background-color: transparent;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.addTabButton:hover {
+  color: var(--primary-foreground);
+  background-color: hsl(263.4 70% 50.4%);
+}
+
+.addIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Control Bar */
+.controlBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+
+.inputButton {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.inputButton span {
+  color: hsl(263.4 70% 50.4%);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.queryNameInput {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 12px;
+  margin-right: 16px;
+  min-width: 280px;
+  max-width: 512px;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--primary);
+}
+
+.queryNameInput:disabled {
+  background-color: var(--muted);
+  cursor: not-allowed;
+}
+
+.controlButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.runButton,
+.saveButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.runButton {
+  background-color: hsl(263.4 70% 50.4%);
+  color: white;
+  border: none;
+}
+
+.runButton:hover {
+  background-color: hsl(263.4 70% 40%);
+}
+
+.runButton:disabled {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+  cursor: not-allowed;
+}
+
+.saveButton {
+  background-color: var(--muted);
+  color: var(--primary);
+  border: none;
+}
+
+.saveButton:hover {
+  background-color: hsl(263.4 70% 50.4%);
+  color: white;
+}
+
+.saveButton:disabled {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+  cursor: not-allowed;
+}
+
+.controlIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Editor Area */
+.editorArea {
+  height: 100%;
+}
+
+.emptyEditor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border: none;
+  background-color: var(--primary-foreground);
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted-foreground);
+  font-size: 24px;
+}
+
+.emptyState .addIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--muted-foreground);
+}

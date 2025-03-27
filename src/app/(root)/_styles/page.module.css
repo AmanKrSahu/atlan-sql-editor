@@ -1,9 +1,4 @@
 .container {
-  padding: 16px;
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--primary);
+  height: 100%;
+  width: 100%;
 }
