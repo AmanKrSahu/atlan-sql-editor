@@ -1,13 +1,13 @@
 [
   {
-    "categoryID": 2,
-    "description": "Sweet and savory sauces relishes spreads and seasonings",
-    "name": "Condiments"
-  },
-  {
     "categoryID": 1,
     "description": "Soft drinks coffees teas beers and ales",
     "name": "Beverages"
+  },
+  {
+    "categoryID": 2,
+    "description": "Sweet and savory sauces relishes spreads and seasonings",
+    "name": "Condiments"
   },
   {
     "categoryID": 3,

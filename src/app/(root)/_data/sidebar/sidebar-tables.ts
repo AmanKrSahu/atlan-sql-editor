@@ -12,22 +12,6 @@ export const sidebarTable = {
       },
     },
     {
-      title: "customers",
-      icon: Grid2X2,
-      items: {
-        customerID: "string",
-        companyName: "string",
-        contactName: "string",
-        contactTitle: "string",
-        street: "string",
-        city: "string",
-        region: "string",
-        postalCode: "string",
-        country: "string",
-        phone: "string",
-      },
-    },
-    {
       title: "products",
       icon: Grid2X2,
       items: {

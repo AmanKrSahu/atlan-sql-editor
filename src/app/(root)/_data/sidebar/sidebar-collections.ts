@@ -11,13 +11,6 @@ export const sidebarCollection = {
       },
     },
     {
-      title: "customers",
-      icon: Folder,
-      items: {
-        SELECT: "All Customers",
-      },
-    },
-    {
       title: "products",
       icon: Folder,
       items: {

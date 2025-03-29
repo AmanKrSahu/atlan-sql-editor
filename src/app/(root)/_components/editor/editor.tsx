@@ -1,14 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
+import categories from "@/app/(root)/_data/tables/categories.json";
+import products from "@/app/(root)/_data/tables/products.json";
+import shippers from "@/app/(root)/_data/tables/shippers.json";
 import styles from "@/app/(root)/_styles/editor.module.css";
 import { useTheme } from "@/app/providers/theme-provider";
 
 import ControlBar from "./control-bar";
 import EmptyEditorState from "./empty-state";
+import { QueryStats } from "./query-stats";
 import SQLEditor from "./sql-editor";
 import TabBar from "./tab-bar";
+import { Table } from "./table";
 
 interface Tab {
   id: string;
@@ -17,11 +23,23 @@ interface Tab {
   value: string;
 }
 
+interface QueryStatsData {
+  executionTime: number | null;
+  runTime: Date | null;
+}
+
 const SQLQueryEditor = () => {
   const { darkMode } = useTheme();
   const [tabs, setTabs] = useState<Tab[]>([]);
   const [activeTabId, setActiveTabId] = useState<string | null>(null);
   const [queryName, setQueryName] = useState("");
+  const [queryResult, setQueryResult] = useState<
+    Record<string, unknown>[] | null
+  >(null);
+  const [queryStats, setQueryStats] = useState<QueryStatsData>({
+    executionTime: null,
+    runTime: null,
+  });
 
   const createNewTab = () => {
     const newTab: Tab = {
@@ -53,20 +71,88 @@ const SQLQueryEditor = () => {
     );
   };
 
+  const executeQuery = (query: string) => {
+    const startTime = performance.now();
+    const startDate = new Date();
+
+    let result: Record<string, unknown>[] = [];
+    query = query.toLowerCase().trim();
+
+    try {
+      if (query.includes("select")) {
+        let tableData: Record<string, unknown>[] = [];
+
+        if (query.includes("from categories")) {
+          tableData = [...categories];
+        } else if (query.includes("from products")) {
+          tableData = [...products];
+        } else if (query.includes("from shippers")) {
+          tableData = [...shippers];
+        } else {
+          toast.error("Table not found");
+          return {
+            result: [],
+            stats: {
+              executionTime: performance.now() - startTime,
+              runTime: startDate,
+            },
+          };
+        }
+
+        if (query.includes("select * from")) {
+          result = [...tableData];
+        } else {
+          const columns = query
+            .split("select")[1]
+            .split("from")[0]
+            .split(",")
+            .map(col => col.trim());
+
+          result = tableData.map(item => {
+            const row: Record<string, unknown> = {};
+            columns.forEach(col => {
+              if (col in item) {
+                row[col] = item[col as keyof typeof item];
+              }
+            });
+            return row;
+          });
+        }
+
+        toast.success("Query executed successfully!");
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast.error("Error executing query");
+      result = [];
+    }
+
+    const executionTime = performance.now() - startTime;
+
+    return {
+      result,
+      stats: {
+        executionTime,
+        runTime: startDate,
+      },
+    };
+  };
+
   const handleRunQuery = () => {
-    console.log(
-      "Running query:",
-      tabs.find(tab => tab.id === activeTabId)?.value,
-    );
+    const activeTab = tabs.find(tab => tab.id === activeTabId);
+    if (!activeTab) return;
+
+    const { result, stats } = executeQuery(activeTab.value);
+    setQueryResult(result);
+    setQueryStats(stats);
   };
 
   const handleSaveQuery = () => {
-    if (!queryName.trim()) return;
-    console.log(
-      "Saving query:",
-      queryName,
-      tabs.find(tab => tab.id === activeTabId)?.value,
-    );
+    if (!queryName.trim()) {
+      toast.error("Please enter a query name");
+      return;
+    }
+    toast.success("Query added to Collections!");
   };
 
   const activeTab = tabs.find(tab => tab.id === activeTabId);
@@ -91,15 +177,29 @@ const SQLQueryEditor = () => {
 
       <div className={styles.editorArea}>
         {activeTab ? (
-          <SQLEditor
-            key={`${activeTabId}-${darkMode ? "dark" : "light"}`}
-            language={activeTab.language}
-            value={activeTab.value}
-            darkMode={darkMode}
-            onChange={value =>
-              activeTabId && updateTabValue(activeTabId, value)
-            }
-          />
+          <>
+            <div className={styles.editorHeight}>
+              <SQLEditor
+                key={`${activeTabId}-${darkMode ? "dark" : "light"}`}
+                language={activeTab.language}
+                value={activeTab.value}
+                darkMode={darkMode}
+                onChange={value =>
+                  activeTabId && updateTabValue(activeTabId, value)
+                }
+              />
+            </div>
+            {queryResult && (
+              <div className={styles.resultsContainer}>
+                <QueryStats
+                  rowCount={queryResult.length}
+                  executionTime={queryStats.executionTime || 0}
+                  runTime={queryStats.runTime || new Date()}
+                />
+                <Table result={queryResult} />
+              </div>
+            )}
+          </>
         ) : (
           <EmptyEditorState />
         )}
