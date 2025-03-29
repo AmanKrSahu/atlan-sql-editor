@@ -1,0 +1,67 @@
+/* Table Container */
+.tableContainer {
+  height: 280px;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+  background-color: var(--background);
+}
+
+.tableContainer::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  font-size: 16px;
+  color: var(--primary);
+  border-collapse: collapse;
+}
+
+/* Table Header */
+.tableHeader {
+  top: 0;
+}
+
+.tableHeaderCell {
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+}
+
+.sortableHeader {
+  cursor: pointer;
+}
+
+.sortIcon {
+  margin-left: 0.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* Table Body */
+.tableRow {
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+.tableRow:nth-child(even) {
+  background-color: var(--background);
+}
+
+.tableCell {
+  padding: 0.5rem 1rem;
+  border-right: 1px solid var(--border);
+  word-break: break-word;
+}
+
+.tableCell:last-child {
+  border-right: none;
+}
