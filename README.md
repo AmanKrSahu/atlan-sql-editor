@@ -1,49 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with
-[`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🚀 SQL Query Runner Web Application
 
-## Getting Started
+This project is a web-based application designed to accept, execute, and display
+SQL query results in real-time. The application includes an interactive SQL
+query editor, supports multiple queries, and provides performance optimizations
+for an efficient user experience.
 
-First, run the development server:
+<img src="https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=for-the-badge" />
+<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+<img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white" />
+<img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" />
+<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+## 🛠 Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page
-auto-updates as you edit the file.
+| Technology                 | Function in the Project                                                  |
+| -------------------------- | ------------------------------------------------------------------------ |
+| **Next.js**                | React-based framework for building the web application.                  |
+| **TypeScript**             | Ensures type safety and improves code maintainability.                   |
+| **CSS3**                   | Provides styling and responsiveness for the UI.                          |
+| **Monaco-Editor**          | Powers the SQL query editor with syntax highlighting and autocompletion. |
+| **Zustand**                | Manages global state efficiently for UI interactions.                    |
+| **TanStack React-Table**   | Displays query results in an interactive, sortable table.                |
+| **TanStack React-Virtual** | Optimizes table rendering for large datasets.                            |
+| **ESLint & Prettier**      | Maintains code consistency and formatting.                               |
+| **Husky & Commitlint**     | Enforces commit message standards and pre-commit checks.                 |
 
-This project uses
-[`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
-to automatically optimize and load [Geist](https://vercel.com/font), a new font
-family for Vercel.
+<br>
 
-## Learn More
+## 📜 Repository Standards
 
-To learn more about Next.js, take a look at the following resources:
+- Includes [`CODE_OF_CONDUCT.md`](/CODE_OF_CONDUCT.md) and
+  [`MIT LICENSE`](/LICENSE) to ensure project integrity.
+- Prettier is the default code formatter
+  ([`prettier configuration`](/prettier.config.js)).
+- Strict ESLint rules:
+  - [`ESLint configurations`](/eslint.config.mjs) ensure clean and maintainable
+    code.
+  - Warns about unused variables and enforces TypeScript best practices.
+- **Advanced TypeScript configurations** (`noImplicitAny`, `strictNullChecks`)
+  for type safety ([`tsconfig.json`](/tsconfig.json)).
+- **Automatic import sorting** using ESLint plugins for cleaner code
+  organization.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br>
 
-You can check out
-[the Next.js GitHub repository](https://github.com/vercel/next.js) - your
-feedback and contributions are welcome!
+## ✨ UI/UX Features
 
-## Deploy on Vercel
+- **📂 Tab Interface** - Users can open multiple query tabs simultaneously,
+  enabling seamless multitasking.
+- **✍️ Query Editor** - Provides an interactive SQL editor with syntax
+  highlighting, auto-completion, and error detection.
+- **⚡ Query Execution** - Runs SQL queries and displays results in real-time
+  with sorting inside tables.
+- **📊 Query Stats** - Displays execution time, row count, and performance
+  insights for each query.
+- **🔄 Split View** - Allows users to view both the SQL editor and query results
+  side by side.
+- **📜 Table Schema Viewer** - Shows detailed information about database tables,
+  including column names and data types.
+- **📁 Saved Queries** - Users can save frequently used queries as collections
+  for quick access.
+- **🔀 Database Switcher** - Enables users to switch between different databases
+  on the fly.
+- **💾 Local Storage Integration** - Stores user preferences, query history, and
+  saved queries in local storage.
+- **🌙 Dark Mode Support** - Provides a toggle between light and dark themes for
+  better readability.
+- **📤 Export to CSV** - Allows users to download query results in CSV format
+  for further analysis.
+- **🚨 Error Handling & Feedback** - Displays clear error messages and
+  suggestions when SQL execution fails.
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
+<br>
 
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
-for more details.
+### 🏗 Available Commands
+
+Below are the commands you can use along with a brief explanation of their
+functions.
+
+- **`dev`** - Starts the development server.
+- **`build`** - Compiles the application for production.
+- **`start`** - Runs the built production version.
+- **`lint`** - Checks for ESLint errors in the codebase.
+- **`lint:fix`** - Fixes ESLint issues automatically.
+- **`format`** - Checks if files adhere to the Prettier formatting rules.
+- **`format:fix`** - Auto-formats files to match Prettier rules.
+- **`type-check`** - Runs TypeScript type-checking to ensure correctness.
+- **`prepare`** - Initializes Husky for commit hooks.
+- **`lint-staged`** - Runs formatting and linting on staged files before
+  committing.
+
+<br>
+
+## ⚡ Performance Optimizations
+
+- **State Management with Zustand** - Ensures efficient state updates without
+  unnecessary re-renders.
+- **Optimized Event Handlers** - Utilizes `useCallback` for functions to prevent
+  unwanted component re-renders.
+- **Local State Variables** - Minimizes reliance on global state for improved
+  responsiveness.
+- **Memoization** - Functions like table row selection, toggles, and UI actions
+  are memoized using `useMemo` and `useCallback` to enhance performance.
+- **Virtualized Table Rendering** - Uses `TanStack React-Virtual` to display
+  large datasets efficiently, reducing memory and rendering load.
+- **Optimized DOM Manipulation** - Reduces expensive DOM updates using efficient
+  reconciliation strategies.

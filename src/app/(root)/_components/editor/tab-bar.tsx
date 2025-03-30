@@ -45,7 +45,11 @@ const TabBar = ({
         </div>
       ))}
     </div>
-    <button className={styles.addTabButton} onClick={onNewTab}>
+    <button
+      className={styles.addTabButton}
+      onClick={onNewTab}
+      aria-label="Add New Tab"
+    >
       <Plus className={styles.addIcon} />
     </button>
   </div>
