@@ -5,12 +5,7 @@ SQL query results in real-time. The application includes an interactive SQL
 query editor, supports multiple queries, and provides performance optimizations
 for an efficient user experience.
 
-<img src="https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=for-the-badge" />
-<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-<img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white" />
-<img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" />
-<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" />
+<img src="https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=for-the-badge" /> <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" /> <img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white" /> <img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" /> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" />
 
 <br>
 
@@ -76,7 +71,7 @@ for an efficient user experience.
 
 <br>
 
-### 🏗 Available Commands
+## 🏗 Available Commands
 
 Below are the commands you can use along with a brief explanation of their
 functions.
@@ -109,3 +104,11 @@ functions.
   large datasets efficiently, reducing memory and rendering load.
 - **Optimized DOM Manipulation** - Reduces expensive DOM updates using efficient
   reconciliation strategies.
+
+<br>
+
+## 🔥 Lighthouse Report: Page Load Time
+
+To look into the page loading time of the application Lighthouse has been used and the report has been attached below for the reference.
+
+![sql-editor](https://github.com/user-attachments/assets/a9ecb465-0e38-43c0-99de-2b122d8faf2f)
