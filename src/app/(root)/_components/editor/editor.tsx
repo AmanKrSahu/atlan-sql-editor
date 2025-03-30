@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import categories from "@/app/(root)/_data/tables/categories.json";
@@ -8,6 +8,7 @@ import products from "@/app/(root)/_data/tables/products.json";
 import shippers from "@/app/(root)/_data/tables/shippers.json";
 import styles from "@/app/(root)/_styles/editor.module.css";
 import { useTheme } from "@/app/providers/theme-provider";
+import { useEditorStore } from "@/app/store/editor-store";
 
 import ControlBar from "./control-bar";
 import EmptyEditorState from "./empty-state";
@@ -16,13 +17,6 @@ import SQLEditor from "./sql-editor";
 import TabBar from "./tab-bar";
 import { Table } from "./table";
 
-interface Tab {
-  id: string;
-  title: string;
-  language: string;
-  value: string;
-}
-
 interface QueryStatsData {
   executionTime: number | null;
   runTime: Date | null;
@@ -30,8 +24,14 @@ interface QueryStatsData {
 
 const SQLQueryEditor = () => {
   const { darkMode } = useTheme();
-  const [tabs, setTabs] = useState<Tab[]>([]);
-  const [activeTabId, setActiveTabId] = useState<string | null>(null);
+  const {
+    tabs,
+    activeTabId,
+    setActiveTabId,
+    setTabs,
+    updateTabValue,
+    createNewTab,
+  } = useEditorStore();
   const [queryName, setQueryName] = useState("");
   const [queryResult, setQueryResult] = useState<
     Record<string, unknown>[] | null
@@ -41,17 +41,13 @@ const SQLQueryEditor = () => {
     runTime: null,
   });
 
-  const createNewTab = () => {
-    const newTab: Tab = {
-      id: `tab-${Date.now()}`,
-      title: `Query ${tabs.length + 1}`,
-      language: "sql",
-      value: "-- Write your SQL query here\nSELECT * FROM categories;",
-    };
-    setTabs([...tabs, newTab]);
-    setActiveTabId(newTab.id);
-    setQueryName("");
-  };
+  useEffect(() => {
+    setQueryResult(null);
+    setQueryStats({
+      executionTime: null,
+      runTime: null,
+    });
+  }, [activeTabId]);
 
   const closeTab = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -63,12 +59,6 @@ const SQLQueryEditor = () => {
         newTabs.length > 0 ? newTabs[newTabs.length - 1].id : null,
       );
     }
-  };
-
-  const updateTabValue = (id: string, value: string | undefined) => {
-    setTabs(
-      tabs.map(tab => (tab.id === id ? { ...tab, value: value || "" } : tab)),
-    );
   };
 
   const executeQuery = (query: string) => {
@@ -180,12 +170,12 @@ const SQLQueryEditor = () => {
           <>
             <div className={styles.editorHeight}>
               <SQLEditor
-                key={`${activeTabId}-${darkMode ? "dark" : "light"}`}
+                key={activeTabId}
                 language={activeTab.language}
                 value={activeTab.value}
                 darkMode={darkMode}
                 onChange={value =>
-                  activeTabId && updateTabValue(activeTabId, value)
+                  activeTabId && updateTabValue(activeTabId, value || "")
                 }
               />
             </div>

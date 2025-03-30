@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, Database } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import styles from "@/app/(root)/_styles/sidebar.module.css";
@@ -22,6 +22,7 @@ const DatabaseSwitcher = ({
 }: DatabaseSwitcherProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const toggleDropdown = useCallback(() => setIsOpen(prev => !prev), []);
 
@@ -33,7 +34,6 @@ const DatabaseSwitcher = ({
     [setSelectedDatabase],
   );
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -49,39 +49,52 @@ const DatabaseSwitcher = ({
   }, []);
 
   return (
-    <div className={styles.databaseSwitcher} ref={dropdownRef}>
-      <button
-        className={styles.switcherButton}
-        onClick={toggleDropdown}
-        aria-expanded={isOpen}
-        aria-haspopup="listbox"
-        aria-label="Select database"
-      >
-        <span>{selectedDatabase}</span>
-        <ChevronsUpDown className={styles.icon} size={16} aria-hidden="true" />
-      </button>
-      {isOpen && (
-        <ul
-          className={styles.dropdown}
-          role="listbox"
-          aria-label="Database options"
+    <div className={styles.databaseSwitcherWrapper}>
+      <div className={styles.databaseSwitcher} ref={dropdownRef}>
+        <button
+          ref={buttonRef}
+          className={styles.switcherButton}
+          onClick={toggleDropdown}
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          aria-label="Select database"
         >
-          {databases.map(db => (
-            <li
-              key={db.name}
-              className={styles.dropdownItem}
-              onClick={() => selectDatabase(db.name)}
-              role="option"
-              aria-selected={db.name === selectedDatabase}
-            >
-              <span>{db.name}</span>
-              {db.name === selectedDatabase && (
-                <Check className={styles.icon} size={16} aria-hidden="true" />
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+          <Database className={styles.icon} size={16} aria-hidden="true" />
+          <span>{selectedDatabase}</span>
+          <ChevronsUpDown
+            className={styles.icon}
+            size={16}
+            aria-hidden="true"
+          />
+        </button>
+        {isOpen && (
+          <ul
+            className={styles.dropdown}
+            role="listbox"
+            aria-label="Database options"
+          >
+            {databases.map(db => (
+              <li
+                key={db.name}
+                className={styles.dropdownItem}
+                onClick={() => selectDatabase(db.name)}
+                role="option"
+                aria-selected={db.name === selectedDatabase}
+              >
+                <span>{db.name}</span>
+                {db.name === selectedDatabase && (
+                  <Check
+                    className={styles.icon}
+                    style={{ color: "hsl(349.7 89.2% 60.2%)" }}
+                    size={16}
+                    aria-hidden="true"
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

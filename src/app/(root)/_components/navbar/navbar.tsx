@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Settings } from "lucide-react";
+import { Bell, CircleHelp } from "lucide-react";
 import Image from "next/image";
 
 import styles from "@/app/(root)/_styles/navbar.module.css";
@@ -30,7 +30,7 @@ const Navbar = () => {
           <ThemeIcon size={20} />
         </button>
         <Bell className={styles.icon} aria-hidden="true" />
-        <Settings className={styles.icon} aria-hidden="true" />
+        <CircleHelp className={styles.icon} aria-hidden="true" />
         <div className={styles.avatar}>
           <Image
             src="/images/avatars/female-avatar.png"
