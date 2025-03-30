@@ -1,6 +1,7 @@
 "use client";
 
-import { CheckCircle2, Clock, Database } from "lucide-react";
+import { CheckCircle2, Clock, Database, Download } from "lucide-react";
+import toast from "react-hot-toast";
 
 import styles from "@/app/(root)/_styles/editor.module.css";
 
@@ -17,6 +18,19 @@ export const QueryStats = ({
 }: QueryStatsProps) => {
   const formattedExecutionTime = (executionTime / 1000).toFixed(2);
   const formattedRunTime = runTime.toLocaleString();
+
+  const handleExport = () => {
+    const toastId = toast.loading("Preparing download...");
+
+    try {
+      setTimeout(() => {
+        toast.success("Download started!", { id: toastId });
+      }, 1000);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast.error("Failed to prepare download", { id: toastId });
+    }
+  };
 
   return (
     <div className={styles.queryStatsContainer}>
@@ -42,6 +56,16 @@ export const QueryStats = ({
       <div className={styles.statItem}>
         <span>Run At: {formattedRunTime}</span>
       </div>
+
+      <button
+        className={styles.exportButton}
+        onClick={handleExport}
+        disabled={rowCount === 0}
+        title="Export results"
+      >
+        <Download className={styles.exportIcon} />
+        <span>Export</span>
+      </button>
     </div>
   );
 };

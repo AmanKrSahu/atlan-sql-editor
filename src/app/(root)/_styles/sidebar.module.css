@@ -18,56 +18,79 @@
 }
 
 /* Database Switcher */
-.databaseSwitcher {
+.databaseSwitcherWrapper {
+  position: relative;
   margin-top: 8px;
+  width: 100%;
+}
+
+.databaseSwitcher {
+  position: relative;
+  width: 100%;
 }
 
 .switcherButton {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
   border-radius: 6px;
   background-color: transparent;
   width: 100%;
   cursor: pointer;
   transition: all 0.2s;
-  border: none;
+  border: 1px solid var(--border);
+  color: var(--foreground);
 }
 
-.databaseSwitcher span {
-  margin-left: 32px;
-  font-size: 16px;
+.switcherButton:hover {
+  background-color: var(--muted);
+}
+
+.switcherButton span {
+  font-size: 14px;
   font-weight: 500;
-  color: var(--primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.databaseSwitcher .icon {
-  margin-left: auto;
+.switcherButton .icon {
   color: var(--muted-foreground);
+  flex-shrink: 0;
 }
 
 .dropdown {
   position: absolute;
-  top: 100%;
   left: 0;
-  right: 0;
+  top: calc(100% + 4px);
   list-style-type: none;
   padding: 8px 0;
-  margin-top: 4px;
+  margin: 0;
   border-radius: 6px;
+  background-color: var(--background);
+  border: 1px solid var(--border);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 1000;
   max-height: 300px;
   overflow-y: auto;
+  width: 100%;
+  min-width: 200px;
 }
 
 .dropdownItem {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 8px 16px;
   cursor: pointer;
-  color: #e2e8f0;
+  color: var(--foreground);
   transition: all 0.2s;
   font-size: 14px;
+}
+
+.dropdownItem:hover {
+  background-color: var(--muted);
 }
 
 /* Sidebar Tables & Collections */
@@ -141,10 +164,11 @@
 
 .schemaItemTables {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   font-size: 12px;
   margin-left: 16px;
+  background-color: transparent;
+  border: none;
 }
 
 .schemaKeyTables {
@@ -153,6 +177,7 @@
 
 .schemaValueTables {
   color: var(--muted-foreground);
+  margin-left: auto;
 }
 
 .schemaContainerCollections {
@@ -167,10 +192,12 @@
   align-items: center;
   font-size: 12px;
   margin-left: 16px;
+  border: none;
+  background-color: transparent;
 }
 
 .schemaKeyCollections {
-  color: hsl(263.4 70% 50.4%);
+  color: hsl(349.7 89.2% 60.2%);
   margin-right: 12px;
   font-weight: 700;
 }

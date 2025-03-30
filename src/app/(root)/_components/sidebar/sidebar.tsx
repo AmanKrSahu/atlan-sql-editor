@@ -1,12 +1,12 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
 import { useCallback, useState } from "react";
 
 import { sidebarCollection } from "@/app/(root)/_data/sidebar/sidebar-collections";
 import { sidebarDatabase } from "@/app/(root)/_data/sidebar/sidebar-databases";
 import { sidebarTable } from "@/app/(root)/_data/sidebar/sidebar-tables";
 import styles from "@/app/(root)/_styles/sidebar.module.css";
+import { useEditorStore } from "@/app/store/editor-store";
 
 import DatabaseSwitcher from "./database-switcher";
 import SidebarSection from "./sidebar-section";
@@ -25,6 +25,8 @@ const Sidebar = () => {
   const [expandedCollectionItems, setExpandedCollectionItems] =
     useState<ExpandedItems>({});
 
+  const { createNewTabWithContent } = useEditorStore();
+
   const toggleTableItem = useCallback((tableTitle: string) => {
     setExpandedTableItems(prev => ({
       ...prev,
@@ -38,6 +40,15 @@ const Sidebar = () => {
       [collectionTitle]: !prev[collectionTitle],
     }));
   }, []);
+
+  const handleCollectionItemClick = useCallback(
+    (collectionTitle: string) => {
+      createNewTabWithContent(
+        `-- Write your SQL query here\nSELECT * FROM ${collectionTitle.toLowerCase()};`,
+      );
+    },
+    [createNewTabWithContent],
+  );
 
   const renderItems = (
     items: typeof sidebarTable.tables | typeof sidebarCollection.collections,
@@ -58,12 +69,6 @@ const Sidebar = () => {
         >
           <item.icon className={styles.icon} aria-hidden="true" />
           <span className={styles.tableTitle}>{item.title}</span>
-          <ChevronRight
-            className={`${styles.icon} ${styles.collapseIcon} ${
-              expandedItems[item.title] ? styles.expanded : ""
-            }`}
-            aria-hidden="true"
-          />
         </button>
         {expandedItems[item.title] && (
           <div
@@ -72,7 +77,11 @@ const Sidebar = () => {
             role="region"
           >
             {Object.entries(item.items).map(([key, value]) => (
-              <div key={key} className={itemStyle}>
+              <div
+                key={key}
+                className={itemStyle}
+                onClick={() => handleCollectionItemClick(item.title)}
+              >
                 <span className={keyStyle}>{key}</span>
                 <span className={valueStyle}>{value}</span>
               </div>
